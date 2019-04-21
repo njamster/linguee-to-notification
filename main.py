@@ -46,8 +46,13 @@ if __name__ == '__main__':
     if not notify2.init("lingue-to-notification"):
         sys.exit(1)
 
-    query = get_current_selection()
-    if not query:
+    if len(sys.argv) == 1: 
+        query = get_current_selection()
+        if not query:
+            sys.exit(1)
+    elif len(sys.argv) == 2:
+        query = sys.argv[1]
+    else:
         sys.exit(1)
 
     translation = translate(query)
