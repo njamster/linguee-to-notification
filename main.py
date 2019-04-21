@@ -34,6 +34,9 @@ def translate(query, language1="english", language2="german"):
 
         translations = lemma.find_all("a", { "class": "dictLink featured" })
         for t in translations:
+            # remove all grammar-info from the text
+            for tag in t.select("span.grammar_info"):
+                tag.decompose()
             result += "• %s\n" % t.text
 
     return result.rstrip()
